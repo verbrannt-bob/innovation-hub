@@ -29,7 +29,6 @@ Abrir `avance1/index.html` en el navegador. No requiere instalación.
  
 _(se completa durante las semanas 2 a 4)_
  
-## Resumen de commits
  
 ## Resumen de commits
  
@@ -37,6 +36,10 @@ _(se completa durante las semanas 2 a 4)_
 |---|------------|---------|--------------------------|--------|---------------|
 | 1 | 2026-09-08 | f689ec7 | Crear estructura del avance 1 y documentacion inicial | Catalogo | Nav |
 | 2 | 2026-09-08 | 852eb9f | Maquetar el encabezado y la navagación del catálogo | Global | Carpetas | 
+| 3 | 2026-09-08 | b53565d | Agregar resumen de commits al README | README | Resumen Commits |
+| 4 | 2026-09-08 | 7e96bcb | Crear seccion de filtros para el catalogo | Catalogo | Filtros |
+| 5 | 2026-09-08 | 96acd27 | Crear Tarjetas para diferentes iniciativas | Catalogo | Tarjetas |
+| 6 | 2026-09-08 | fb0f273 | Agregar el footer con informacion de contacto | Catalogo | Footer |
 
 
 
