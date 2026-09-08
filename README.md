@@ -31,8 +31,12 @@ _(se completa durante las semanas 2 a 4)_
  
 ## Resumen de commits
  
-<!-- INICIO TABLA COMMITS -->
+## Resumen de commits
  
-<!-- FIN TABLA COMMITS -->
+| # | Fecha      | Hash    | Mensaje                  | Zona   | Cambio        |
+|---|------------|---------|--------------------------|--------|---------------|
+| 1 | 2026-09-08 | f689ec7 | Crear estructura del avance 1 y documentacion inicial | Catalogo | Nav |
+| 2 | 2026-09-08 | 852eb9f | Maquetar el encabezado y la navagación del catálogo | Global | Carpetas | 
+
 
 
