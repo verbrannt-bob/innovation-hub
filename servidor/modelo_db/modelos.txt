@@ -1,0 +1,39 @@
+Competencias
+{
+  "_id": "ObjectId",
+  "nombre": "String"
+}
+
+Usuarios
+{
+  "_id": "ObjectId",
+  "nombre": "String",
+  "correo": "String",
+  "competencias": [
+    {
+      "id_competencia": "ObjectId (ref: Competencia)",
+      "nivel": "String enum: ['basico', 'intermedio', 'avanzado']"
+    }
+  ]
+}
+
+Iniciativa
+{
+  "_id": "ObjectId",
+  "titulo": "String",
+  "tipo": "String enum: ['Reto', 'Idea', 'Necesidad']",
+  "resumen": "String",
+  "descripcion": "String",
+  "problema": "String",
+  "beneficiados": "String",
+  "categoria": "String enum: ['Tecnología', 'Educación', 'Sostenibilidad', 'Impacto Social', 'Negocios y Emprendimiento', 'Salud y Bienestar', 'Cultura y Creatividad', 'Otros']",
+  "competencias": ["ObjectId (ref: Competencia)"],
+  "cantidadIntegrantes": "Number",
+  "visibilidad": "String enum: ['Pública', 'Institucional', 'Restringida', 'Privada']",
+  "etiquetas": ["String"],
+  "estado": "String enum: ['Borrador', 'Publicada', 'En formación de equipo', 'Convertida en proyecto', 'Archivada']",
+  "propietario": "ObjectId (ref: Usuario)",
+  "miembros": ["ObjectId (ref: Usuario)"],
+  "fechaCreacion": "Date",
+  "fechaUltimaModificacion": "Date"
+}

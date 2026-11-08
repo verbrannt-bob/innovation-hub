@@ -1,0 +1,59 @@
+# requests.http
+# Peticiones de prueba para la extensión REST Client de VS Code.
+ 
+@api = http://localhost:3000/api
+
+GET {{api}}/iniciativas
+
+###
+GET {{api}}/iniciativas/6af0bc2507b642c0b3e8c6ad
+ 
+###
+GET {{api}}/usuarios
+
+###
+GET {{api}}/usuarios/6af0a9c5435a9fd2c128c017
+ 
+### 3. 
+POST {{api}}/usuarios
+Content-Type: application/json
+
+{ "nombre": "Roberto", "apellido1":  "González", "apellido2": "Castillo", "email": "rgonzalezca@ucenfotec.ac.cr", "password":"12345", "tipo": "Estudiante", "carrera": "BISOFT", "fechaRegistro": "2026-11-08T06:09:55.243Z", "estado": "Activa", "disponibilidad": "", "competencias": [], "descripcion": "Insertar Descripción", "intereses": ["Tennis", "Desarrollo Web"]
+}
+
+###
+POST {{api}}/iniciativas
+Content-Type: application/json
+
+{
+  "titulo": "Plataforma de Gestión de Voluntariado Universitario",
+  "tipo": "Idea",
+  "resumen": "Sistema web para coordinar y registrar horas de acción social.",
+  "descripcion": "Desarrollo de un backend en Node.js y MongoDB para facilitar la inscripción de estudiantes a proyectos de impacto comunitario y seguimiento de avances.",
+  "problema": "Dificultad en el seguimiento manual de horas de voluntariado e inscripción a proyectos.",
+  "beneficiados": "Estudiantes universitarios y organizaciones comunitarias asociadas.",
+  "categoria": "Tecnología",
+  "competencias": ["6aefd5266f36b07018154b4f", "6aefd5266f36b07018154b50", "6aefd5266f36b07018154b51"],
+  "cantidadIntegrantes": 5,
+  "visibilidad": "Pública",
+  "etiquetas": ["Node.js", "Express", "MongoDB"],
+  "estado": "Borrador",
+  "propietarioId": "6af0185329feac689924522c",
+  "miembrosIds": [
+    "6af0185329feac689924522c"
+  ],
+  "fechaCreacion": "2026-11-08T06:45:00.000Z",
+  "fechaUltimaModificacion": "2026-11-08T06:45:00.000Z"
+}
+
+###
+PATCH {{api}}/iniciativas/6af020dfde1efc4b44978a6b/nuevoMiembro
+Content-Type: application/json
+
+{
+  "id": "6af021963aa3732c7b3a016f"
+}
+
+###
+DELETE {{api}}/iniciativas/6af036559995e9e143c2c328
+Content-Type: application/json
