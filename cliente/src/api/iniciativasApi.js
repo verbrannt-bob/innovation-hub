@@ -45,3 +45,7 @@ export function obtenerUsuarios() {
 export function obtenerUsuarioId(id) {
     return pedir('/usuarios/' + id)
 }
+
+export function loginApi(credenciales) {
+    return pedir('/usuarios/login', 'POST', credenciales)
+}

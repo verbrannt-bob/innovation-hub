@@ -1,0 +1,62 @@
+@use 'variables' as *;
+
+:root {
+  /* Cambia el color primario global de Bootstrap 5 */
+  --bs-primary: #00479b;          /* Tu nuevo color principal (ejemplo: Azul) */
+  --bs-primary-rgb: 0, 71, 155; /* Mismo color en formato RGB separado por comas */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+body {
+  background-color: $light;
+  color: $dark;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.encabezado-principal {
+  background-color: $primary;
+
+  .logo-icon {
+    color: $secondary-light;
+  }
+
+  .btn-user {
+    --bs-btn-color: #{$secondary-light};
+    --bs-btn-border-color: none;
+    --bs-btn-hover-color: #{$light};
+    --bs-btn-hover-bg: none;
+    --bs-btn-active-bg: none;
+    --bs-btn-active-color: #{$secondary-dark};
+  }
+
+  .opcion-usuario{
+    width: 10vw;
+  }
+}
+
+.panel {
+  width: fit-content;
+}

@@ -4,7 +4,8 @@ import { obtenerUsuarioId } from '../../api/iniciativasApi'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faBrain } from "@fortawesome/free-solid-svg-icons"
 
-function InfoPerfil(id) {
+// ✅ FIX 1: Desestructurar { id } desde las props
+function InfoPerfil({ id }) {
     const [usuario, setUsuario] = useState(null)
     const [cargando, setCargando] = useState(true)
     const [error, setError] = useState(null)
@@ -20,15 +21,21 @@ function InfoPerfil(id) {
                 setCargando(false)
             }
         }
-        cargar()
-    }, [])
+        if (id) cargar()
+    }, [id])
 
+    // ✅ FIX 2: Evitar renderizar el JSX mientras cargan los datos o si ocurre un error
+    if (cargando) return <p className="text-center p-5">Cargando perfil...</p>
+    if (error) return <p className="text-center p-5 text-danger">Error: {error}</p>
+    if (!usuario) return <p className="text-center p-5">No se encontró el usuario.</p>
 
     return (
         <section className="row d-flex justify-content-start align-items-top perfil-usuario">
-            <img src={fotoPerfilDefecto} alt="foto-perfil" className="col-6 col-sm-4 col-md-3 col-lg-2" />
+            <img src={fotoPerfilDefecto} alt="foto-perfil" className="col-6 col-sm-4 col-md-3 col-lg-2 img-fluid object-fit-cover" />
             <div className="col-6 col-lg-10">
-                <h2 className="nombre">{usuario.nombre + usuario.apellido1 + usuario.apellido2}</h2>
+                <h2 className="nombre">
+                    {`${usuario.nombre ?? ''} ${usuario.apellido1 ?? ''} ${usuario.apellido2 ?? ''}`}
+                </h2>
                 <p>{usuario.tipo}</p>
                 <div className="d-flex flex-column justify-content-around">
                     <h3 className="etiqueta">Carrera</h3>
@@ -42,17 +49,25 @@ function InfoPerfil(id) {
             <div className="col-12 col-md-6">
                 <h3 className="etiqueta">Competencias</h3>
                 <div>
-                    {usuario.competencias?.map((competencia) =>{
-                        <p class="card m-0 mt-1 p-1 d-flex flex-row align-items-center gap-3 tarjeta-perfil" key={competencia._id}><FontAwesomeIcon icon={faCheck} size="xs" color="#00a896"/><span>{competencia.nombre}</span></p>
-                    })}
+                    {/* ✅ FIX 3: Retorno implícito con () y className */}
+                    {usuario.competencias?.map((competencia) => (
+                        <p className="card m-0 mt-1 p-1 d-flex flex-row align-items-center gap-3 tarjeta-perfil" key={competencia._id || competencia}>
+                            <FontAwesomeIcon icon={faCheck} size="xs" color="#00a896"/>
+                            <span>{competencia.nombre || competencia}</span>
+                        </p>
+                    ))}
                 </div>
             </div>
             <div className="col-12 col-md-6">
                 <h3 className="etiqueta">Intereses</h3>
                 <div>
-                    {usuario.intereses?.map((interes, index) => {
-                        <p class="card m-0 mt-1 p-1 d-flex flex-row align-items-center gap-3 tarjeta-perfil" key={index}><FontAwesomeIcon icon={faBrain} size="xs" color="#00a896"/><span>{interes}</span></p>
-                    })}
+                    {/* ✅ FIX 3: Retorno implícito con () y className */}
+                    {usuario.intereses?.map((interes, index) => (
+                        <p className="card m-0 mt-1 p-1 d-flex flex-row align-items-center gap-3 tarjeta-perfil" key={index}>
+                            <FontAwesomeIcon icon={faBrain} size="xs" color="#00a896"/>
+                            <span>{interes}</span>
+                        </p>
+                    ))}
                 </div>
             </div>
             <div className="col-12">
@@ -62,3 +77,5 @@ function InfoPerfil(id) {
         </section>
     )
 }
+
+export default InfoPerfil

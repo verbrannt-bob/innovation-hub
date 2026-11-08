@@ -1,57 +1,3 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  /* Cambia el color primario global de Bootstrap 5 */
-  --bs-primary: #00479b;          /* Tu nuevo color principal (ejemplo: Azul) */
-  --bs-primary-rgb: 0, 71, 155; /* Mismo color en formato RGB separado por comas */
-}
-
-html {
-  font-size: 100%;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-body {
-  background-color: #f8fafc;
-  color: #080b0f;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  flex: 1;
-}
-
-.encabezado-principal {
-  background-color: #00479b;
-}
-.encabezado-principal .logo-icon {
-  color: #00a896;
-}
-.encabezado-principal .btn-user {
-  --bs-btn-color: #00a896;
-  --bs-btn-border-color: none;
-  --bs-btn-hover-color: #f8fafc;
-  --bs-btn-hover-bg: none;
-  --bs-btn-active-bg: none;
-  --bs-btn-active-color: #032057;
-}
-.encabezado-principal .opcion-usuario {
-  width: 10vw;
-}
-
 .filtros button {
   background-color: #f8fafc;
   color: #004b87;
@@ -135,7 +81,6 @@ main {
 }
 .detalle-iniciativa .encabezado-iniciativa {
   border-bottom: #00a896 1px solid;
-  max-height: -moz-max-content;
   max-height: max-content;
 }
 .detalle-iniciativa .encabezado-iniciativa .btn-outline-primary {
@@ -195,27 +140,6 @@ main {
   --bs-btn-hover-border-color: #00a896;
 }
 
-.perfil-usuario {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.perfil-usuario .nombre {
-  color: #004b87;
-}
-.perfil-usuario p {
-  margin: 0;
-  padding: 0 0.3rem;
-}
-.perfil-usuario .etiqueta {
-  margin: 0;
-  padding: 0.3rem 0.3rem 0 0.3rem;
-  font-size: 1rem;
-  color: #032057;
-}
-.perfil-usuario .tarjeta-perfil i {
-  color: #00a896;
-}
-
 .formulario-inscripcion {
   max-width: 600px;
   margin: 0 auto;
@@ -249,4 +173,102 @@ main {
 .formulario-inscripcion button:hover {
   background-color: #00a896;
   color: #f8fafc;
-}/*# sourceMappingURL=estilos.css.map */
+}
+
+:root {
+  /* Cambia el color primario global de Bootstrap 5 */
+  --bs-primary: #00479b; /* Tu nuevo color principal (ejemplo: Azul) */
+  --bs-primary-rgb: 0, 71, 155; /* Mismo color en formato RGB separado por comas */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #080b0f;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.encabezado-principal {
+  background-color: #004b87;
+}
+.encabezado-principal .logo-icon {
+  color: #00a896;
+}
+.encabezado-principal .btn-user {
+  --bs-btn-color: #00a896;
+  --bs-btn-border-color: none;
+  --bs-btn-hover-color: #f8fafc;
+  --bs-btn-hover-bg: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-active-color: #032057;
+}
+.encabezado-principal .opcion-usuario {
+  width: 10vw;
+}
+
+.panel {
+  width: fit-content;
+}
+
+.perfil-usuario {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.perfil-usuario .nombre {
+  color: #004b87;
+}
+.perfil-usuario p {
+  margin: 0;
+  padding: 0 0.3rem;
+}
+.perfil-usuario .etiqueta {
+  margin: 0;
+  padding: 0.3rem 0.3rem 0 0.3rem;
+  font-size: 1rem;
+  color: #032057;
+}
+.perfil-usuario .tarjeta-perfil i {
+  color: #00a896;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #004b87;
+  --bs-btn-border-color: #004b87;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #004b87;
+  --bs-btn-hover-border-color: #004b87;
+  --bs-btn-focus-shadow-rgb: 13, 110, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #004b87;
+  --bs-btn-active-border-color: #004b87;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #004b87;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #004b87;
+  --bs-gradient: none;
+}
+
+/*# sourceMappingURL=estilos.css.map */

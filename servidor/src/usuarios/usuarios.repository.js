@@ -56,3 +56,7 @@ export async function crear(usuario) {
   const resultado = await coleccion().insertOne(usuario)
   return resultado.insertedId
 }
+
+export async function buscarPorEmail(email) {
+  return coleccion().findOne({ email })
+}

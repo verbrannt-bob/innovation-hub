@@ -14,3 +14,9 @@ export async function  buscar(req, res) {
   const usuario = await servicio.buscar(req.params.id)
   res.json(usuario)
 }
+
+export async function login(req, res) {
+  const { email, password } = req.body ?? {}
+  const usuario = await servicio.login(email, password)
+  res.json(usuario)
+}

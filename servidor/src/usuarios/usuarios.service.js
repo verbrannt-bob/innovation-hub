@@ -48,3 +48,22 @@ export async function buscar(id) {
   
     return repositorio.buscarPorId(id)
 }
+
+
+
+export async function login(email, password) {
+  if (!email || !password) {
+    throw new HttpError(400, 'DATOS_INCOMPLETOS', 'Ingrese correo y contraseña.')
+  }
+
+  const usuario = await repositorio.buscarPorEmail(email)
+  
+  // Validar si existe el usuario y coincide la contraseña
+  if (!usuario || usuario.password !== password) {
+    throw new HttpError(401, 'CREDENCIALES_INVALIDAS', 'Correo o contraseña incorrectos.')
+  }
+
+  // No enviar la contraseña al cliente por seguridad
+  const { password: _, ...usuarioSinPassword } = usuario
+  return usuarioSinPassword
+}
