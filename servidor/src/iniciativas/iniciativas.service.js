@@ -3,20 +3,17 @@ import * as repositorio from './iniciativas.repository.js'
 import * as usuarios from '../usuarios/usuarios.service.js'
 import { validarIniciativa } from './iniciativas.validacion.js'
 import { HttpError } from '../utils/HttpError.js'
+import { revisarId } from "../utils/revisarId.js"
 
  
-export async function listar() {
-  return repositorio.listar()
-}
-
-export async function crear(datos){
+export async function crear(datos) {
   const errores = validarIniciativa(datos)
   if (Object.keys(errores).length > 0) {
     throw new HttpError(400, 'Datos_INVALIDOS', 'Revise los datos enviados.', errores)
   }
 
   if (!(await usuarios.existe(datos.propietarioId))) {
-    throw new HttpError(400, 'Datos_INVALIDOS', 'Revise los datos enviados.', {propietarioId: 'Este usuario no existe'})
+    throw new HttpError(400, 'Datos_INVALIDOS', 'Revise los datos enviados.', { propietarioId: 'Este usuario no existe' })
   }
 
   const hoy = new Date()
@@ -26,14 +23,14 @@ export async function crear(datos){
     tipo: datos.tipo,
     resumen: datos.resumen.trim(),
     descripcion: datos.descripcion.trim(),
-    problema: datos.problema.trim(),
-    beneficiados: datos.beneficiados.trim(),
+    problema: datos.problema.trim() || 'No especificado',
+    beneficiados: datos.beneficiados.trim() || 'General',
     categoria: datos.categoria,
-    competencias:  datos.competencias.map(id => new ObjectId(id)),
-    cantidadIntegrantes: datos.cantidadIntegrantes,
+    competencias: (datos.competencias || []).map(id => new ObjectId(id)),
+    cantidadIntegrantes: Number(datos.cantidadIntegrantes),
     visibilidad: datos.visibilidad, 
-    etiquetas: datos.etiquetas,
-    estado: "Borrador",
+    etiquetas: datos.etiquetas || [],
+    estado: datos.estado,
     propietarioId: new ObjectId(datos.propietarioId),
     miembros: [new ObjectId(datos.propietarioId)],
     fechaCreacion: hoy,
@@ -43,7 +40,6 @@ export async function crear(datos){
 
   return repositorio.buscarPorId(id)
 }
-
 export async function buscar(id){
   revisarId(id)
   const existe = await repositorio.buscarPorId(id)
@@ -72,9 +68,6 @@ export async function eliminar(id){
     throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe')
   }
 }
-
-// iniciativas.service.js
-import { revisarId } from "../utils/revisarId.js" //[cite: 16]
 
 export async function buscarPorMiembro(usuarioId) {
   revisarId(usuarioId)

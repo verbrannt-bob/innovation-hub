@@ -1,3 +1,4 @@
+
 import { ObjectId } from 'mongodb'
 
 export const TIPOS = ['Reto', 'Idea', 'Necesidad']
@@ -21,11 +22,11 @@ export function validarIniciativa(datos) {
     }
 
     if (typeof datos.descripcion !== 'string' || datos.descripcion.trim().length < 2) {
-        errores.descripcion = 'Escriba una descripcion detallada de al menos 2 caracteres.'
+        errores.descripcion = 'Escriba una descripción detallada de al menos 2 caracteres.'
     }
 
     if (typeof datos.problema !== 'string' || datos.problema.trim().length < 2) {
-        errores.problema = 'Describa el problema que resulve la iniciativa con al menos 2 caracteres.'
+        errores.problema = 'Describa el problema que resuelve la iniciativa con al menos 2 caracteres.'
     }
 
     if (typeof datos.beneficiados !== 'string' || datos.beneficiados.trim().length < 2) {
@@ -36,15 +37,17 @@ export function validarIniciativa(datos) {
         errores.categoria = 'Elija una categoría de la lista.'
     }
 
-    datos.competencias.forEach(competencia => {
-        if (typeof competencia !== 'string' || !ObjectId.isValid(competencia)) {
-            errores.competencia = 'Seleccione una competencia válida'
-        }
-    });
+    if (Array.isArray(datos.competencias)) {
+        datos.competencias.forEach(competencia => {
+            if (typeof competencia !== 'string' || !ObjectId.isValid(competencia)) {
+                errores.competencia = 'Seleccione competencias válidas.'
+            }
+        })
+    }
 
-    const cantidadIntegrantes = datos.cantidadIntegrantes
-    if (!Number.isInteger(cantidadIntegrantes) || cantidadIntegrantes < 2 || cantidadIntegrantes > 30) {
-        errores.temporadas = 'Indique un número entero entre 2 y 30.'
+    const cantidadIntegrantes = Number(datos.cantidadIntegrantes)
+    if (!Number.isInteger(cantidadIntegrantes) || cantidadIntegrantes < 1 || cantidadIntegrantes > 30) {
+        errores.cantidadIntegrantes = 'Indique un número entero entre 1 y 30.'
     }
 
     if (!VISIBILIDADES.includes(datos.visibilidad)) {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import FormularioBase from './FormularioBase'
-import { TIPOS, CATEGORIAS, VISIBILIDADES } from '../../data/iniciativas' // Importa las constantes globales[cite: 10, 12]
+import { TIPOS, CATEGORIAS, VISIBILIDADES } from '../../dataPrueba/iniciativas' // Importa las constantes globales[cite: 10, 12]
 import { obtenerCompetencias } from '../../api/iniciativasApi'
 
 function FormularioIniciativa({ usuarioSesion, onIniciativaCreada }) {

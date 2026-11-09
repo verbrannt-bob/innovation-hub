@@ -65,3 +65,7 @@ export function agregarCompetenciaAUsuario(usuarioId, competenciaId, nombre, niv
 export function crearSolicitud(datosSolicitud) {
     return pedir('/solicitudes', 'POST', datosSolicitud)
 }
+
+export function crearIniciativa(datosIniciativa) {
+    return pedir('/iniciativas', 'POST', datosIniciativa)
+}

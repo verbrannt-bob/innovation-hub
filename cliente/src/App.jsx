@@ -6,6 +6,7 @@ import Iniciativa from './paginas/Iniciativa.jsx'
 import Perfil from './paginas/Perfil.jsx'
 import SolicitudIniciativa from "./paginas/SolicitudIniciativa.jsx"
 import NoEncontrado from "./paginas/NoEncontrado.jsx"
+import CrearIniciativa from "./paginas/CrearIniciativa.jsx"
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path:"/solicitud/:id",
     element: <SolicitudIniciativa />
+  },
+  {
+    path:"/crear",
+    element: <CrearIniciativa />
   }
 ])
 

@@ -22,3 +22,5 @@ export const DISPONIBILIDADES = [
     'Parcial (5-10h/semana)', 
     'Fines de semana'
 ]
+
+export const VISIBILIDADES = ['Publica', 'Institucional', 'Restringida', 'Privada']
