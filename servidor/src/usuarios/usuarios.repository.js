@@ -5,7 +5,7 @@ const coleccion = () => obtenerDb().collection('usuarios')
 
 export async function listar() {
   return coleccion()
-    .aggregate(CON_DETALLES)
+    .aggregate()
     .sort({ nombre: 1 })
     .toArray()
 }

@@ -312,4 +312,26 @@ main {
   min-width: 130px;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.pagina-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.pagina-layout .main-contenido {
+  flex: 1 0 auto;
+}
+
+.badge {
+  width: 50px;
+  height: 50px;
+  line-height: 24px;
+}
+
 /*# sourceMappingURL=estilos.css.map */

@@ -5,7 +5,12 @@ import { validarIniciativa } from './iniciativas.validacion.js'
 import { HttpError } from '../utils/HttpError.js'
 import { revisarId } from "../utils/revisarId.js"
 
- 
+
+
+export async function listar() {
+  return repositorio.listar()
+}
+
 export async function crear(datos) {
   const errores = validarIniciativa(datos)
   if (Object.keys(errores).length > 0) {
