@@ -24,3 +24,5 @@ export const DISPONIBILIDADES = [
 ]
 
 export const VISIBILIDADES = ['Publica', 'Institucional', 'Restringida', 'Privada']
+
+export const ESTADOS = ['Planificación', 'En desarrollo', 'Pausado', 'Finalizado', 'Archivado']

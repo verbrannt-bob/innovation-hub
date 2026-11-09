@@ -29,3 +29,14 @@ export async function buscarPorMiembro(req, res) {
   const iniciativas = await servicio.buscarPorMiembro(req.params.usuarioId)
   res.json(iniciativas)
 }
+
+export async function actualizar(req, res) {
+  const iniciativa = await servicio.actualizar(req.params.id, req.body ?? {})
+  res.json(iniciativa)
+}
+
+export async function eliminarMiembro(req, res) {
+  const { id, miembroId } = req.params
+  const iniciativa = await servicio.eliminarMiembro(id, miembroId)
+  res.json(iniciativa)
+}

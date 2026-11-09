@@ -8,6 +8,7 @@ import SolicitudIniciativa from "./paginas/SolicitudIniciativa.jsx"
 import NoEncontrado from "./paginas/NoEncontrado.jsx"
 import CrearIniciativa from "./paginas/CrearIniciativa.jsx"
 import Registro from "./paginas/Registro.jsx"
+import EditarIniciativa from "./paginas/EditarIniciativa.jsx"
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,12 @@ const router = createBrowserRouter([
   {
     path:"/registro",
     element: <Registro />
+  },
+  {
+    path:"/editar/:id",
+    element: <EditarIniciativa />
   }
+
 ])
 
 function App() {

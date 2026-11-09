@@ -73,3 +73,15 @@ export function crearIniciativa(datosIniciativa) {
 export function registrarUsuario(datosUsuario) {
     return pedir('/usuarios', 'POST', datosUsuario)
 }
+
+export function eliminarIniciativa(id) {
+    return pedir(`/iniciativas/${id}`, 'DELETE')
+}
+
+export function actualizarIniciativa(id, datos) {
+    return pedir(`/iniciativas/${id}`, 'PUT', datos)
+}
+
+export function eliminarMiembroIniciativa(id, miembroId) {
+    return pedir(`/iniciativas/${id}/miembro/${miembroId}`, 'DELETE')
+}

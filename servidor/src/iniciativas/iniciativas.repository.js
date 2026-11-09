@@ -164,3 +164,11 @@ export async function agregarSolicitudId(iniciativaId, solicitudId) {
   )
   return resultado.matchedCount === 1
 }
+
+export async function actualizar(id, datos) {
+  const resultado = await coleccion().updateOne(
+    { _id: new ObjectId(id) },
+    { $set: datos }
+  )
+  return resultado.matchedCount === 1
+}
