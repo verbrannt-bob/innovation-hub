@@ -6,3 +6,19 @@ export const USUARIO = {
   email: "rgonzalezca@ucenfotec.ac.cr"
 }
 export const NIVELES = ["Básico", "Intermedio", "Avanzado"]
+export const ROLES_DISPONIBLES = [
+    'Desarrollador Frontend', 
+    'Desarrollador Backend', 
+    'Diseñador UX/UI', 
+    'Gestor de Proyecto', 
+    'Analista de Datos', 
+    'QA / Tester',
+    'Otro'
+]
+
+export const DISPONIBILIDADES = [
+    'Tiempo Completo (40h/semana)', 
+    'Medio Tiempo (20h/semana)', 
+    'Parcial (5-10h/semana)', 
+    'Fines de semana'
+]

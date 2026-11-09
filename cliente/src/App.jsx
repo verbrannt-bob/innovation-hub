@@ -4,6 +4,7 @@ import Inicio from './paginas/Inicio.jsx'
 import Catalogo from './paginas/Catalogo.jsx'
 import Iniciativa from './paginas/Iniciativa.jsx'
 import Perfil from './paginas/Perfil.jsx'
+import SolicitudIniciativa from "./paginas/SolicitudIniciativa.jsx"
 import NoEncontrado from "./paginas/NoEncontrado.jsx"
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path:"/perfil/:id",
     element: <Perfil />
+  },
+  {
+    path:"/solicitud/:id",
+    element: <SolicitudIniciativa />
   }
 ])
 

@@ -61,34 +61,31 @@
   --bs-btn-hover-border-color: #00a896;
 }
 
-@media (min-width: 768px) {
-  .detalle-iniciativa section, .detalle-iniciativa aside {
-    min-height: 75vh;
-  }
-}
-.detalle-iniciativa h2 {
-  color: #004b87;
-  font-size: 1.5rem;
-}
-@media (min-width: 576px) {
-  .detalle-iniciativa h2 {
-    font-size: 2.2rem;
-  }
-}
-.detalle-iniciativa p,
-.detalle-iniciativa h3 {
-  margin: 0;
+.detalle-iniciativa {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  padding: 1.5rem;
 }
 .detalle-iniciativa .encabezado-iniciativa {
   border-bottom: #00a896 1px solid;
-  max-height: max-content;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
-.detalle-iniciativa .encabezado-iniciativa .btn-outline-primary {
-  --bs-btn-color: #00a896;
-  --bs-btn-border-color: #f8fafc;
-  --bs-btn-hover-color: #00a896;
-  --bs-btn-hover-bg: #f8fafc;
-  --bs-btn-hover-border-color: #00a896;
+.detalle-iniciativa .encabezado-iniciativa .titulo-iniciativa {
+  color: #004b87;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+@media (min-width: 576px) {
+  .detalle-iniciativa .encabezado-iniciativa .titulo-iniciativa {
+    font-size: 2rem;
+  }
+}
+.detalle-iniciativa .encabezado-iniciativa .propietario-iniciativa {
+  font-weight: 600;
+  color: #032057;
 }
 .detalle-iniciativa .encabezado-iniciativa .btn-editar i {
   color: #00a896;
@@ -96,48 +93,63 @@
 .detalle-iniciativa .encabezado-iniciativa .btn-eliminar i {
   color: #ce0000;
 }
-.detalle-iniciativa .propietario-iniciativa {
-  font-weight: 500;
+.detalle-iniciativa p,
+.detalle-iniciativa h3 {
+  margin: 0;
 }
 .detalle-iniciativa .descripcion-iniciativa {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333333;
 }
 @media (min-width: 576px) {
   .detalle-iniciativa .descripcion-iniciativa {
-    font-size: 1.4rem;
+    font-size: 1.15rem;
   }
 }
 .detalle-iniciativa .etiqueta {
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 0.95rem;
+  font-weight: 700;
   color: #032057;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .detalle-iniciativa .tarjeta-competencia {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   background-color: #f8fafc;
   color: #032057;
-  border-color: #032057;
+  border: 1px solid #032057;
+  border-radius: 0.25rem;
+  transition: transform 0.15s ease-in-out;
 }
 .detalle-iniciativa .tarjeta-competencia i {
   color: #00a896;
 }
 .detalle-iniciativa .tarjeta-miembro {
+  font-size: 0.85rem;
   background-color: #f8fafc;
   color: #032057;
-  border-color: #032057;
+  border: 1px solid #032057;
+  border-radius: 0.25rem;
 }
 .detalle-iniciativa .tarjeta-miembro i {
   color: #00a896;
 }
-.detalle-iniciativa .btn-inscribirse {
-  max-width: 10rem;
-  font-size: 1.2rem;
+.detalle-iniciativa .caracteristicas-iniciativa {
+  border-left: 1px solid rgba(0, 168, 150, 0.2);
+}
+@media (max-width: 767.98px) {
+  .detalle-iniciativa .caracteristicas-iniciativa {
+    border-left: none;
+    border-top: 1px solid rgba(0, 168, 150, 0.2);
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+  }
+}
+.detalle-iniciativa .caracteristicas-iniciativa .item-caracteristica p:not(.etiqueta) {
+  font-size: 1rem;
   font-weight: 500;
-  --bs-btn-color: #00a896;
-  --bs-btn-bg: #f8fafc;
-  --bs-btn-border-color: #00a896;
-  --bs-btn-hover-bg: #00a896;
-  --bs-btn-hover-border-color: #00a896;
 }
 
 .formulario-inscripcion {
@@ -254,6 +266,23 @@ main {
   color: #00a896;
 }
 
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #004b87;
+  --bs-btn-border-color: #004b87;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #032057;
+  --bs-btn-hover-border-color: #032057;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #032057;
+  --bs-btn-active-border-color: #032057;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #004b87;
+  --bs-btn-disabled-border-color: #004b87;
+}
+
 .btn-outline-primary {
   --bs-btn-color: #004b87;
   --bs-btn-border-color: #004b87;
@@ -269,6 +298,18 @@ main {
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #004b87;
   --bs-gradient: none;
+}
+
+.tarjeta-formulario {
+  max-width: 700px;
+}
+
+.campo-deshabilitado {
+  background-color: var(--bs-gray-200);
+}
+
+.boton-accion {
+  min-width: 130px;
 }
 
 /*# sourceMappingURL=estilos.css.map */
