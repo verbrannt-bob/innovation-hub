@@ -1,0 +1,24 @@
+// _layout.scss (o en tu archivo SASS global de layout)
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.pagina-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Garantiza ocupar mínimo el 100% de la altura de la ventana
+
+  .main-contenido {
+    flex: 1 0 auto; // Hace que el main absorba todo el espacio disponible empujando al footer
+  }
+}
+
+.badge {
+  width: 50px;
+  height: 50px;
+  line-height: 24px;
+}

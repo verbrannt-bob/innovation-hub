@@ -56,7 +56,7 @@ function Encabezado() {
                                 <NavLink to="/catalogo" className="nav-link" onClick={() => setNavBarAbierta(false)}>Iniciativas</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/publicar" className="nav-link" onClick={() => setNavBarAbierta(false)}>Publicar</NavLink>
+                                <NavLink to="/crear" className="nav-link" onClick={() => setNavBarAbierta(false)}>Publicar</NavLink>
                             </li>
 
                             {/* --- BOTÓN DE USUARIO Y MENÚ DESPLEGABLE --- */}
