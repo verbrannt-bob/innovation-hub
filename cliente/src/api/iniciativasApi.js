@@ -61,3 +61,7 @@ export function obtenerCompetencias() {
 export function agregarCompetenciaAUsuario(usuarioId, competenciaId, nombre, nivel) {
     return pedir(`/usuarios/${usuarioId}/competencia`, 'PATCH', { competenciaId, nombre, nivel })
 }
+
+export function crearSolicitud(datosSolicitud) {
+    return pedir('/solicitudes', 'POST', datosSolicitud)
+}

@@ -8,6 +8,7 @@ import { iniciativasRouter } from './iniciativas/inicitivas.routes.js'
 import { usuariosRouter } from './usuarios/usuarios.routes.js'
 import { competenciasRouter } from './competencias/competencias.routes.js'
 import { rutaNoEncontrada, manejarErrores } from './middlewares/errores.js'
+import { solicitudesRouter } from './solicitudes/solicitudes.routes.js'
  
 export const app = express()
  
@@ -18,6 +19,7 @@ app.use(express.json())  // convierte el cuerpo JSON en req.body
 app.use('/api/iniciativas', iniciativasRouter)
 app.use('/api/usuarios', usuariosRouter)
 app.use('/api/competencias', competenciasRouter)
+app.use('/api/solicitudes', solicitudesRouter)
 
 app.use(rutaNoEncontrada)  // si ninguna ruta respondió
 app.use(manejarErrores)  // siempre el último

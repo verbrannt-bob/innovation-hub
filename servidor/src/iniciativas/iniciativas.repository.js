@@ -152,3 +152,15 @@ export async function buscarPorMiembro(usuarioId) {
     .sort({ titulo: 1 })
     .toArray()
 }
+
+
+export async function agregarSolicitudId(iniciativaId, solicitudId) {
+  const resultado = await coleccion().updateOne(
+    { _id: new ObjectId(iniciativaId) },
+    {
+      $push: { solicitudesIds: new ObjectId(solicitudId) },
+      $set: { fechaUltimaModificacion: new Date() }
+    }
+  )
+  return resultado.matchedCount === 1
+}

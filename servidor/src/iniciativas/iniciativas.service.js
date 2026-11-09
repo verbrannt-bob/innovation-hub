@@ -37,7 +37,8 @@ export async function crear(datos){
     propietarioId: new ObjectId(datos.propietarioId),
     miembros: [new ObjectId(datos.propietarioId)],
     fechaCreacion: hoy,
-    fechaUltimaModificacion: hoy
+    fechaUltimaModificacion: hoy,
+    solicitudesIds: []
   })
 
   return repositorio.buscarPorId(id)

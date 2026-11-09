@@ -41,9 +41,9 @@ Content-Type: application/json
   "visibilidad": "Pública",
   "etiquetas": ["Node.js", "Express", "MongoDB"],
   "estado": "Borrador",
-  "propietarioId": "6af0d7f2b49c9e12f4ca5ab1",
+  "propietarioId": "6af1108d5b9dfe8a22f11e2e",
   "miembrosIds": [
-    "6af0d7f2b49c9e12f4ca5ab1"
+    "6af1108d5b9dfe8a22f11e2e"
   ],
   "fechaCreacion": "2026-11-08T06:45:00.000Z",
   "fechaUltimaModificacion": "2026-11-08T06:45:00.000Z"
