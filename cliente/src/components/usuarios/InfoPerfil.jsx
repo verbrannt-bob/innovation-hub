@@ -91,7 +91,7 @@ function InfoPerfil({ id }) {
             setUsuario(usuarioActualizado)
             setMostrarForm(false)
         } catch (err) {
-            alert(err.message)
+            console.log(err.message)
         } finally {
             setGuardandoComp(false)
         }

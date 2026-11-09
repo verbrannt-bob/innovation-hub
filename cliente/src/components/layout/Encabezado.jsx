@@ -1,28 +1,22 @@
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faCircleUser, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../autenticacion/AuthContext'
+import FormularioLogin from '../formularios/FormularioLogin'
 
 function Encabezado() {
     const { usuario, login, logout } = useAuth()
-    const navigate = useNavigate()
-
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
     
     // Estados nativos de React para controlar los menús desplegables
     const [menuUserAbierto, setMenuUserAbierto] = useState(false)
     const [navBarAbierta, setNavBarAbierta] = useState(false)
 
-    const handleLoginSubmit = async (e) => {
-        e.preventDefault()
+    const handleLoginSubmit = async (email, password) => {
         setError(null)
         try {
             await login(email, password)
-            setEmail('')
-            setPassword('')
             setMenuUserAbierto(false) // Cierra el menú desplegable tras el login exitoso
         } catch (err) {
             setError(err.message)
@@ -97,34 +91,23 @@ function Encabezado() {
                                             </button>
                                         </div>
                                     ) : (
-                                        // VISTA FORMULARIO DE LOGIN
-                                        <form onSubmit={handleLoginSubmit} className="d-flex flex-column gap-2">
-                                            <h6 className="fw-bold m-0 text-center">Iniciar Sesión</h6>
-                                            {error && <small className="text-danger text-center">{error}</small>}
-                                            <div>
-                                                <input 
-                                                    type="email" 
-                                                    className="form-control form-control-sm" 
-                                                    placeholder="Correo"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                    required 
-                                                />
+                                        // VISTA FORMULARIO DE LOGIN ABSTRAÍDO
+                                        <div>
+                                            <FormularioLogin 
+                                                onLoginSubmit={handleLoginSubmit} 
+                                                error={error} 
+                                            />
+                                            <div className="text-center mt-2 border-top pt-2">
+                                                <small className="text-muted">¿No tienes cuenta? </small>
+                                                <NavLink 
+                                                    to="/registro" 
+                                                    className="small text-primary fw-semibold"
+                                                    onClick={() => setMenuUserAbierto(false)}
+                                                >
+                                                    Registrarse
+                                                </NavLink>
                                             </div>
-                                            <div>
-                                                <input 
-                                                    type="password" 
-                                                    className="form-control form-control-sm" 
-                                                    placeholder="Contraseña"
-                                                    value={password}
-                                                    onChange={(e) => setPassword(e.target.value)}
-                                                    required 
-                                                />
-                                            </div>
-                                            <button type="submit" className="btn btn-primary btn-sm w-100 mt-1">
-                                                Ingresar
-                                            </button>
-                                        </form>
+                                        </div>
                                     )}
                                 </div>
                             </li>

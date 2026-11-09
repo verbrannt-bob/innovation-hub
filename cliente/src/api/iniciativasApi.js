@@ -69,3 +69,7 @@ export function crearSolicitud(datosSolicitud) {
 export function crearIniciativa(datosIniciativa) {
     return pedir('/iniciativas', 'POST', datosIniciativa)
 }
+
+export function registrarUsuario(datosUsuario) {
+    return pedir('/usuarios', 'POST', datosUsuario)
+}
