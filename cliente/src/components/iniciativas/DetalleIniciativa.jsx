@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react"
 import { obtenerIniciativaId, eliminarIniciativa } from "../../api/iniciativasApi"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faClipboardCheck, faEllipsisV, faPenToSquare, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faClipboardCheck, faEllipsisV, faPenToSquare, faTriangleExclamation, faInbox } from "@fortawesome/free-solid-svg-icons"
 import { faUser, faTrashCan } from "@fortawesome/free-regular-svg-icons"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useAuth } from "../../autenticacion/AuthContext"
-import { useParams } from "react-router-dom"
+
 
 function DetalleIniciativa({ id }) {
     const { usuario: usuarioSesion } = useAuth()
@@ -183,13 +183,24 @@ function DetalleIniciativa({ id }) {
                         </div>
                     </div>
 
-                    <div className="mt-3">
-                        <NavLink to={`/solicitud/${id}`} className="text-decoration-none d-flex">
-                            <button className="btn btn-outline-primary d-flex justify-content-center align-items-center gap-2">
-                                <FontAwesomeIcon icon={faClipboardCheck} size="sm" />
-                                <span>Solicitar Participación</span>
-                            </button>
-                        </NavLink>
+                    <div className="mt-3 d-flex flex-column gap-2">
+                        {/* Si ES propietario, ve el botón de Ver Solicitudes */}
+                        {esPropietario ? (
+                            <NavLink to={`/iniciativa/${id}/solicitudes`} className="text-decoration-none d-flex">
+                                <button className="btn btn-primary w-100 d-flex justify-content-center align-items-center gap-2">
+                                    <FontAwesomeIcon icon={faInbox} size="sm" />
+                                    <span>Ver Solicitudes</span>
+                                </button>
+                            </NavLink>
+                        ) : (
+                            /* Si NO es propietario, ve el botón de Solicitar Participación */
+                            <NavLink to={`/solicitud/${id}`} className="text-decoration-none d-flex">
+                                <button className="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center gap-2">
+                                    <FontAwesomeIcon icon={faClipboardCheck} size="sm" />
+                                    <span>Solicitar Participación</span>
+                                </button>
+                            </NavLink>
+                        )}
                     </div>
                 </aside>
             </div>

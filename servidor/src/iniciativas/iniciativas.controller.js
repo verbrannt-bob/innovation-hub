@@ -40,3 +40,23 @@ export async function eliminarMiembro(req, res) {
   const iniciativa = await servicio.eliminarMiembro(id, miembroId)
   res.json(iniciativa)
 }
+
+// iniciativas.controller.js
+
+export async function listarSolicitudes(req, res) {
+  const solicitudes = await servicio.listarSolicitudes(req.params.id)
+  res.json(solicitudes)
+}
+
+export async function aceptarSolicitud(req, res) {
+  const { id, solicitudId } = req.params
+  const { usuarioId } = req.body ?? {}
+  const iniciativaActualizada = await servicio.aceptarSolicitud(id, solicitudId, usuarioId)
+  res.json(iniciativaActualizada)
+}
+
+export async function rechazarSolicitud(req, res) {
+  const { id, solicitudId } = req.params
+  await servicio.rechazarSolicitud(id, solicitudId)
+  res.status(204).end()
+}

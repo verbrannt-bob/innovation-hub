@@ -9,6 +9,7 @@ import NoEncontrado from "./paginas/NoEncontrado.jsx"
 import CrearIniciativa from "./paginas/CrearIniciativa.jsx"
 import Registro from "./paginas/Registro.jsx"
 import EditarIniciativa from "./paginas/EditarIniciativa.jsx"
+import VerSolicitudes from "./paginas/VerSolicitudes.jsx"
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path:"/editar/:id",
     element: <EditarIniciativa />
+  },
+  {
+    path:"/iniciativa/:id/solicitudes",
+    element: <VerSolicitudes />
   }
 
 ])

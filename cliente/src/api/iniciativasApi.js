@@ -66,8 +66,36 @@ export function crearSolicitud(datosSolicitud) {
     return pedir('/solicitudes', 'POST', datosSolicitud)
 }
 
-export function crearIniciativa(datosIniciativa) {
-    return pedir('/iniciativas', 'POST', datosIniciativa)
+// export function crearIniciativa(datosIniciativa) {
+//     return pedir('/iniciativas', 'POST', datosIniciativa)
+// }
+
+// iniciativasApi.js
+
+export async function crearIniciativa(nuevaIniciativa) {
+    const respuesta = await fetch(`${URL_API}/iniciativas`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(nuevaIniciativa)
+    })
+
+    const cuerpo = await respuesta.json()
+
+    if (!respuesta.ok) {
+        // Muestra en la consola de la ventana del navegador exactamente qué falló
+        console.error("Detalles del error 400 devueltos por el Backend:", cuerpo)
+        
+        // Si el backend responde con un objeto de errores por campo, los unimos en el mensaje
+        const detalleErrores = cuerpo.error?.detalles 
+            ? Object.values(cuerpo.error.detalles).join(' ')
+            : (cuerpo.error?.mensaje || 'Error al crear la iniciativa')
+            
+        throw new Error(detalleErrores)
+    }
+
+    return cuerpo
 }
 
 export function registrarUsuario(datosUsuario) {
@@ -84,4 +112,16 @@ export function actualizarIniciativa(id, datos) {
 
 export function eliminarMiembroIniciativa(id, miembroId) {
     return pedir(`/iniciativas/${id}/miembro/${miembroId}`, 'DELETE')
+}
+
+export function obtenerSolicitudesIniciativa(iniciativaId) {
+    return pedir(`/iniciativas/${iniciativaId}/solicitudes`, 'GET')
+}
+
+export function aceptarSolicitudApi(iniciativaId, solicitudId, usuarioId) {
+    return pedir(`/iniciativas/${iniciativaId}/solicitudes/${solicitudId}/aceptar`, 'POST', { usuarioId })
+}
+
+export function rechazarSolicitudApi(iniciativaId, solicitudId) {
+    return pedir(`/iniciativas/${iniciativaId}/solicitudes/${solicitudId}/rechazar`, 'DELETE')
 }

@@ -20,7 +20,7 @@ function FormularioIniciativa({ usuarioSesion, onIniciativaCreada }) {
     const [etiquetaInput, setEtiquetaInput] = useState('')
     const [etiquetas, setEtiquetas] = useState([])
     const [catalogoCompetencias, setCatalogoCompetencias] = useState([])
-    
+
     const [cargando, setCargando] = useState(false)
     const [error, setError] = useState(null)
 
@@ -76,6 +76,11 @@ function FormularioIniciativa({ usuarioSesion, onIniciativaCreada }) {
         e.preventDefault()
         setError(null)
 
+        if (!usuarioSesion?._id) {
+            setError('No hay una sesión de usuario activa. Por favor vuelva a iniciar sesión.')
+            return
+        }
+
         // Validaciones obligatorias de frontend
         if (!formData.titulo.trim() || formData.titulo.trim().length < 2) {
             setError('El título es obligatorio (mínimo 2 caracteres).')
@@ -110,7 +115,7 @@ function FormularioIniciativa({ usuarioSesion, onIniciativaCreada }) {
             cantidadIntegrantes: integrantes,
             visibilidad: formData.visibilidad,
             etiquetas: etiquetas,
-            
+
             // Campos automáticos del sistema
             propietarioId: usuarioSesion?._id,
             miembros: [usuarioSesion?._id],

@@ -22,10 +22,12 @@ function ListaIniciativas({ iniciativas, usuarioActivo }) {
 
     return (
         <section className="contenedor-tarjetas row d-flex justify-content-around gap-3">
-            <button className="col-11 btn btn-outline-primary position-relative p-0" type="button">
-                <FontAwesomeIcon icon={faLightbulb} className='me-2' />
-                Crear una Iniciativa
-            </button>
+            <NavLink to="/crear">
+                <button className="col-11 btn btn-outline-primary position-relative p-0" type="button">
+                    <FontAwesomeIcon icon={faLightbulb} className='me-2' />
+                    Crear una Iniciativa
+                </button>
+            </NavLink>
 
             {iniciativas.map((iniciativa) => (
                 <TarjetaIniciativa key={iniciativa._id} iniciativa={iniciativa} usuarioActivo={usuarioActivo} />

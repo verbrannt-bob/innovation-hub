@@ -3,9 +3,13 @@ import { NavLink } from 'react-router-dom'
 function TarjetaIniciativa({ iniciativa, usuarioActivo }) {
     if (!iniciativa) return null
 
-    if (iniciativa.visibilidad === "Privada" && usuarioActivo.email !== iniciativa.propietario.email) return null
+    const emailUsuario = usuarioActivo?.email ?? ''
+    const emailPropietario = iniciativa.propietario?.email ?? ''
 
-    if (iniciativa.visibilidad === "Restringida" && usuarioActivo.email !== iniciativa.propietario.email) {
+    // Si la iniciativa es privada y el usuario no es el propietario, no se muestra
+    if (iniciativa.visibilidad === "Privada" && emailUsuario !== emailPropietario) return null
+
+    if (iniciativa.visibilidad === "Restringida" && emailUsuario !== emailPropietario) {
         return (
             <article className="col-11 col-sm-5 col-lg-3 p-2 tarjeta-iniciativa d-flex flex-column gap-1 justify-content-between">
                 <div className="d-flex justify-content-between gap-3 encabezado-tarjeta">
@@ -29,7 +33,16 @@ function TarjetaIniciativa({ iniciativa, usuarioActivo }) {
         )
     }
 
-    if ((iniciativa.visibilidad === "Institucional" && usuarioActivo.email.endsWith("@ucenfotec.ac.cr")) || iniciativa.visibilidad === "Pública" || usuarioActivo.email === iniciativa.propietario.email) {
+    if (
+        (iniciativa.visibilidad === "Institucional" && emailUsuario.endsWith("@ucenfotec.ac.cr")) || 
+        iniciativa.visibilidad === "Pública" || 
+        emailUsuario === emailPropietario
+    ) {
+        // Nombre del propietario seguro (evita undefined/null)
+        const nombrePropietario = iniciativa.propietario 
+            ? `${iniciativa.propietario.nombre || ''} ${iniciativa.propietario.apellido1 || ''}`.trim()
+            : 'Sin propietario'
+
         return (
             <article className="col-11 col-sm-5 col-lg-3 p-2 tarjeta-iniciativa d-flex flex-column gap-1 justify-content-between">
                 <div className="d-flex justify-content-between gap-3 encabezado-tarjeta">
@@ -45,7 +58,7 @@ function TarjetaIniciativa({ iniciativa, usuarioActivo }) {
                 </div>
                 <div className="propietario d-flex justify-content-between">
                     <p className="etiqueta">Propietario: </p>
-                    <p>{iniciativa.propietario.nombre + " " + iniciativa.propietario.apellido1}</p>
+                    <p>{nombrePropietario}</p>
                 </div>
                 <div className="estado d-flex justify-content-between">
                     <p className="etiqueta">Estado:</p>

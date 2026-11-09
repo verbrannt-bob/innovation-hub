@@ -172,3 +172,55 @@ export async function actualizar(id, datos) {
   )
   return resultado.matchedCount === 1
 }
+
+export async function obtenerSolicitudesPorIniciativa(iniciativaId) {
+  const objectId = typeof iniciativaId === 'string' ? new ObjectId(iniciativaId) : iniciativaId
+  
+  // Asumiendo que la colección de solicitudes es 'solicitudes'
+  return obtenerDb().collection('solicitudes')
+    .aggregate([
+      { $match: { iniciativaId: objectId } },
+      {
+        $lookup: {
+          from: 'usuarios',
+          localField: 'usuarioId',
+          foreignField: '_id',
+          as: 'solicitante'
+        }
+      },
+      { $unwind: '$solicitante' },
+      {
+        $project: {
+          _id: 1,
+          iniciativaId: 1,
+          usuarioId: 1,
+          mensaje: 1,
+          fecha: 1,
+          solicitante: {
+            _id: '$solicitante._id',
+            nombre: '$solicitante.nombre',
+            apellido1: '$solicitante.apellido1',
+            apellido2: '$solicitante.apellido2',
+            email: '$solicitante.email',
+            carrera: '$solicitante.carrera'
+          }
+        }
+      }
+    ])
+    .toArray()
+}
+
+export async function eliminarSolicitud(solicitudId, iniciativaId) {
+  const objectIdSolicitud = new ObjectId(solicitudId)
+  const objectIdIniciativa = new ObjectId(iniciativaId)
+
+  // 1. Eliminar documento de la colección de solicitudes
+  await obtenerDb().collection('solicitudes').deleteOne({ _id: objectIdSolicitud })
+
+  // 2. Remover la referencia del arreglo solicitudesIds de la iniciativa
+  await coleccion().updateOne(
+    { _id: objectIdIniciativa },
+    { $pull: { solicitudesIds: objectIdSolicitud } }
+  )
+  return true
+}

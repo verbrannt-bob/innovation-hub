@@ -125,3 +125,33 @@ export async function eliminarMiembro(id, miembroId) {
 
   return repositorio.buscarPorId(id)
 }
+
+// iniciativas.service.js
+
+export async function listarSolicitudes(iniciativaId) {
+  revisarId(iniciativaId)
+  return repositorio.obtenerSolicitudesPorIniciativa(iniciativaId)
+}
+
+export async function aceptarSolicitud(iniciativaId, solicitudId, usuarioId) {
+  revisarId(iniciativaId)
+  revisarId(solicitudId)
+  revisarId(usuarioId)
+
+  // 1. Agregar el usuario a la lista de miembros de la iniciativa
+  await repositorio.agregarMiembro(iniciativaId, usuarioId)
+
+  // 2. Eliminar la solicitud
+  await repositorio.eliminarSolicitud(solicitudId, iniciativaId)
+
+  return repositorio.buscarPorId(iniciativaId)
+}
+
+export async function rechazarSolicitud(iniciativaId, solicitudId) {
+  revisarId(iniciativaId)
+  revisarId(solicitudId)
+
+  // Simplemente eliminar la solicitud
+  await repositorio.eliminarSolicitud(solicitudId, iniciativaId)
+  return true
+}

@@ -8,7 +8,6 @@ import { obtenerIniciativas } from '../api/iniciativasApi.js'
 import { useAuth } from '../autenticacion/AuthContext.jsx'
 
 function Catalogo() {
-
   const [filtroCategoria, setFiltroCategoria] = useState('Todos')
   const [filtroTipo, setFiltroTipo] = useState('Todos')
   const [filtroCompetencia, setFiltroCompetencia] = useState('Todos')
@@ -19,16 +18,14 @@ function Catalogo() {
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
 
-  const visibles = iniciativas.filter((iniciativa) => {
-    // 1. Filtros de categoría, tipo y competencia
+  // Filtrado seguro contra arreglos o campos no definidos
+  const visibles = (iniciativas ?? []).filter((iniciativa) => {
     const coincideCategoria = filtroCategoria === 'Todos' || iniciativa.categoria === filtroCategoria
     const coincideTipo = filtroTipo === 'Todos' || iniciativa.tipo === filtroTipo
 
-    // Si competencias son objetos o strings en la respuesta
     const coincideCompetencia = filtroCompetencia === 'Todos' ||
       iniciativa.competencias?.some(c => (c.nombre ?? c) === filtroCompetencia)
 
-    // 2. Filtro textual sobre título, resumen, descripción y etiquetas
     const termino = busqueda.toLowerCase().trim()
     const coincideTexto = !termino || (
       (iniciativa.titulo?.toLowerCase().includes(termino)) ||
@@ -44,7 +41,7 @@ function Catalogo() {
     async function cargar() {
       try {
         const listaIniciativas = await obtenerIniciativas()
-        setIniciativas(listaIniciativas)
+        setIniciativas(listaIniciativas ?? [])
       } catch (err) {
         setError(err.message)
       } finally {
@@ -59,7 +56,7 @@ function Catalogo() {
       <Pagina>
         <div className="text-center py-5">
           <div className="spinner-border text-primary" role="status"></div>
-          <p className="mt-3">Cargando series…</p>
+          <p className="mt-3">Cargando iniciativas…</p>
         </div>
       </Pagina>
     )
@@ -79,12 +76,14 @@ function Catalogo() {
         </div>
       )}
 
-      <BarraBusqueda>
+      {/* SE AGREGARON VALOR Y ONCAMBIAR A BARRABUSQUEDA */}
+      <BarraBusqueda valor={busqueda} onCambiar={setBusqueda}>
         <Filtro nombre='Categorías' opciones={CATEGORIAS} valor={filtroCategoria} onCambiar={setFiltroCategoria} />
         <Filtro nombre='Tipos' opciones={TIPOS} valor={filtroTipo} onCambiar={setFiltroTipo} />
         <Filtro nombre='Competencias' opciones={COMPETENCIAS} valor={filtroCompetencia} onCambiar={setFiltroCompetencia} />
       </BarraBusqueda>
-      <ListaIniciativas iniciativas={visibles} usuarioActivo={usuario} />
+
+      <ListaIniciativas iniciativas={visibles} usuarioActivo={usuario ?? null} />
     </Pagina>
   )
 }
