@@ -20,3 +20,11 @@ export async function login(req, res) {
   const usuario = await servicio.login(email, password)
   res.json(usuario)
 }
+
+export async function agregarCompetencia(req, res) {
+  const { id } = req.params
+  const { competenciaId, nombre, nivel } = req.body ?? {}
+  
+  const usuarioActualizado = await servicio.agregarCompetencia(id, competenciaId, nombre, nivel)
+  res.json(usuarioActualizado)
+}

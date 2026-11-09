@@ -12,6 +12,9 @@ GET {{api}}/iniciativas/6af0bc2507b642c0b3e8c6ad
 GET {{api}}/usuarios
 
 ###
+GET {{api}}/competencias
+
+###
 GET {{api}}/usuarios/6af0a9c5435a9fd2c128c017
  
 ### 3. 

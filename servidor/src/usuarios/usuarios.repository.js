@@ -3,39 +3,6 @@ import { obtenerDb } from '../config/db.js'
 
 const coleccion = () => obtenerDb().collection('usuarios')
 
-const CON_DETALLES = [
-  // 1. Buscar las competencias correspondientes a los IDs
-  {
-    $lookup: {
-      from: 'competencias', // Nombre exacto de tu colección de competencias
-      localField: 'competencias',
-      foreignField: '_id',
-      as: 'competenciasDetalle'
-    }
-  },
-  // 2. Sobrescribir únicamente el campo 'competencias' manteniendo todos los demás atributos intactos
-  {
-    $addFields: {
-      competencias: {
-        $map: {
-          input: '$competenciasDetalle',
-          as: 'competencia',
-          in: {
-            _id: '$$competencia._id',
-            nombre: '$$competencia.nombre'
-          }
-        }
-      }
-    }
-  },
-  // 3. (Opcional) Eliminar el campo temporal creado por el $lookup
-  {
-    $project: {
-      competenciasDetalle: 0
-    }
-  }
-];
-
 export async function listar() {
   return coleccion()
     .aggregate(CON_DETALLES)
@@ -45,11 +12,7 @@ export async function listar() {
 
 export async function buscarPorId(id) {
   const objectId = typeof id === 'string' ? new ObjectId(id) : id
-  const [usuario] = await coleccion()
-    .aggregate([{ $match: { _id: objectId } }, ...CON_DETALLES])
-    .toArray()
-
-  return usuario ?? null
+  return coleccion().findOne({ _id: objectId })
 }
 
 export async function crear(usuario) {
@@ -59,4 +22,32 @@ export async function crear(usuario) {
 
 export async function buscarPorEmail(email) {
   return coleccion().findOne({ email })
+}
+
+// usuarios.repository.js
+export async function agregarCompetencia(usuarioId, competenciaId, nombre, nivel) {
+  const objectIdUsuario = new ObjectId(usuarioId)
+  const objectIdCompetencia = new ObjectId(competenciaId)
+
+  // 1. Eliminar si la competencia ya existía previa para evitar duplicados
+  await coleccion().updateOne(
+    { _id: objectIdUsuario },
+    { $pull: { competencias: { _id: objectIdCompetencia } } }
+  )
+
+  // 2. Insertar el objeto completo desnormalizado con _id, nombre y nivel
+  const resultado = await coleccion().updateOne(
+    { _id: objectIdUsuario },
+    { 
+      $push: { 
+        competencias: { 
+          _id: objectIdCompetencia,
+          nombre: nombre,
+          nivel: nivel 
+        } 
+      } 
+    }
+  )
+
+  return resultado.matchedCount === 1
 }

@@ -48,7 +48,7 @@ function Catalogo() {
   }
 
   return (
-    <Pagina titulo="Catálogo">
+    <Pagina titulo="Iniciativas">
       {error && (
         <div className="alert alert-danger d-flex justify-content-between align-items-center">
           <span>{error}</span>

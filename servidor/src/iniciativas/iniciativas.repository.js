@@ -134,3 +134,21 @@ export async function eliminar(id){
   const resultado =  await coleccion().deleteOne({ _id: new ObjectId(id)})
   return resultado.deletedCount === 1
 }
+
+export async function buscarPorMiembro(usuarioId) {
+  const objectId = typeof usuarioId === 'string' ? new ObjectId(usuarioId) : usuarioId
+
+  return coleccion()
+    .aggregate([
+      // 1. Filtrar las iniciativas que contengan ese ObjectId dentro del arreglo de miembros
+      {
+        $match: {
+          miembros: objectId
+        }
+      },
+      // 2. Aplicar las relaciones (propietario, miembros, competencias)
+      ...CON_DETALLES
+    ])
+    .sort({ titulo: 1 })
+    .toArray()
+}

@@ -3,7 +3,6 @@ import * as repositorio from './iniciativas.repository.js'
 import * as usuarios from '../usuarios/usuarios.service.js'
 import { validarIniciativa } from './iniciativas.validacion.js'
 import { HttpError } from '../utils/HttpError.js'
-import { revisarId } from "../utils/revisarId.js"
 
  
 export async function listar() {
@@ -71,4 +70,12 @@ export async function eliminar(id){
   if(!existia) {
     throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe')
   }
+}
+
+// iniciativas.service.js
+import { revisarId } from "../utils/revisarId.js" //[cite: 16]
+
+export async function buscarPorMiembro(usuarioId) {
+  revisarId(usuarioId)
+  return repositorio.buscarPorMiembro(usuarioId)
 }

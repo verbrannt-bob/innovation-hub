@@ -67,3 +67,25 @@ export async function login(email, password) {
   const { password: _, ...usuarioSinPassword } = usuario
   return usuarioSinPassword
 }
+
+
+// usuarios.service.js
+export async function agregarCompetencia(usuarioId, competenciaId, nombre, nivel) {
+  revisarId(usuarioId)
+  revisarId(competenciaId)
+
+  if (!nombre || typeof nombre !== 'string') {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'Se requiere el nombre de la competencia.')
+  }
+
+  if (!nivel || typeof nivel !== 'string') {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'Debe seleccionar un nivel válido.')
+  }
+
+  const ok = await repositorio.agregarCompetencia(usuarioId, competenciaId, nombre, nivel)
+  if (!ok) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'El usuario no existe.')
+  }
+  
+  return repositorio.buscarPorId(usuarioId)
+}

@@ -24,3 +24,8 @@ export async function buscar(req, res) {
   const iniciativa = await servicio.buscar(req.params.id)
   res.json(iniciativa)
 }
+
+export async function buscarPorMiembro(req, res) {
+  const iniciativas = await servicio.buscarPorMiembro(req.params.usuarioId)
+  res.json(iniciativas)
+}

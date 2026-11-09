@@ -49,3 +49,15 @@ export function obtenerUsuarioId(id) {
 export function loginApi(credenciales) {
     return pedir('/usuarios/login', 'POST', credenciales)
 }
+
+export function obtenerIniciativasPorMiembro(usuarioId) {
+    return pedir('/iniciativas/miembro/' + usuarioId)
+}
+
+export function obtenerCompetencias() {
+    return pedir('/competencias')
+}
+
+export function agregarCompetenciaAUsuario(usuarioId, competenciaId, nombre, nivel) {
+    return pedir(`/usuarios/${usuarioId}/competencia`, 'PATCH', { competenciaId, nombre, nivel })
+}
